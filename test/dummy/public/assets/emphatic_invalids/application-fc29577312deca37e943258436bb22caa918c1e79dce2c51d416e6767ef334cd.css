@@ -1,3 +1,14 @@
+.validation-error {
+	border: solid 2px #a94442;
+  background-color: #fcf8e3;
+}
+
+.error-tooltips {
+	font-size: 12px !important;
+	color: white !important;
+	border-color: red !important;
+	background: #a94442 !important;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -10,7 +21,8 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
- *= require emphatic_invalids/style.css
+
+
+ *= emphatic_invalids_styles
  */
+

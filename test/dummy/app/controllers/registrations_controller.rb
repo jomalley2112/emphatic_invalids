@@ -27,8 +27,8 @@ class RegistrationsController < ApplicationController
         redirect_to @registration, notice: 'Registration was successfully created.'
         format.js { head :ok }
       else
-        format.html { render :new }
-        emphasize_invalids(@folder, format)
+        # format.html { render :new }
+        emphasize_invalids(@registration, format)
       end
     end
   end

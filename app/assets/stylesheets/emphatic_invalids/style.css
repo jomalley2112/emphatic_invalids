@@ -1,0 +1,15 @@
+/*
+ *= require jquery-ui/tooltip
+*/
+
+.validation-error {
+	border: solid 2px #a94442;
+  background-color: #fcf8e3;
+}
+
+.error-tooltips {
+	font-size: 12px !important;
+	color: white !important;
+	border-color: red !important;
+	background: #a94442 !important;
+}
