@@ -24,8 +24,8 @@ class RegistrationsController < ApplicationController
     @registration = Registration.new(registration_params)
     respond_to do |format|
       if @registration.save
-        redirect_to @registration, notice: 'Registration was successfully created.'
-        format.js { head :ok }
+        format.html { redirect_to @registration, notice: 'Registration was successfully created.' }
+        format.js { render :success }
       else
         # format.html { render :new }
         emphasize_invalids(@registration, format)
@@ -35,10 +35,14 @@ class RegistrationsController < ApplicationController
 
   # PATCH/PUT /registrations/1
   def update
-    if @registration.update(registration_params)
-      redirect_to @registration, notice: 'Registration was successfully updated.'
-    else
-      render :edit
+    respond_to do |format|
+      if @registration.update(registration_params)
+        format.html { redirect_to @registration, notice: 'Registration was successfully updated.' }
+        format.js { render :success }
+      else
+        # render :edit
+        emphasize_invalids(@registration, format)
+      end
     end
   end
 
