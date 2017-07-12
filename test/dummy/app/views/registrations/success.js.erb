@@ -1,1 +1,2 @@
 $("body").html("<%= j render(@registration) %>")
+$("p#notice").html("<%= j flash.map{ |k,v| v }.join(', ') %>")

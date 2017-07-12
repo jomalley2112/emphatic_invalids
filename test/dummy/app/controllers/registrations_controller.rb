@@ -25,6 +25,7 @@ class RegistrationsController < ApplicationController
     respond_to do |format|
       if @registration.save
         format.html { redirect_to @registration, notice: 'Registration was successfully created.' }
+        flash.now[:notice] = 'Registration was successfully created.'
         format.js { render :success }
       else
         # format.html { render :new }
@@ -38,6 +39,7 @@ class RegistrationsController < ApplicationController
     respond_to do |format|
       if @registration.update(registration_params)
         format.html { redirect_to @registration, notice: 'Registration was successfully updated.' }
+        flash.now[:notice] = 'Registration was successfully updated.'
         format.js { render :success }
       else
         # render :edit
@@ -60,6 +62,6 @@ class RegistrationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def registration_params
-      params.require(:registration).permit(:first_name, :middle_initial, :last_name, :email, :age, :date_of_birth)
+      params.require(:registration).permit(:first_name, :middle_initial, :last_name, :email, :age, :date_of_birth, :accept_terms, :sex, :favorite_color, prog_languages: [])
     end
 end

@@ -1,0 +1,37 @@
+= form_with(model: registration, local: false, data: { "highlight-errors" => true }) do |form|
+  %div.field
+    = form.label :first_name
+    = form.text_field :first_name, id: :registration_first_name
+  %div.field
+    = form.label :middle_initial
+    = form.text_field :middle_initial, id: :registration_middle_initial
+  %div.field
+    = form.label :last_name
+    = form.text_field :last_name, id: :registration_last_name
+  %div.field
+    = form.label :email
+    = form.text_field :email, id: :registration_email
+  %div.field
+    = form.label :age
+    = form.number_field :age, id: :registration_age
+  %div.field
+    = form.label :date_of_birth
+    = form.date_select :date_of_birth, id: :registration_date_of_birth
+  %div.field
+    = form.label :accept_terms
+    = form.check_box :accept_terms, {id: :accept_terms}, "true", nil
+  %div.field
+    = form.label :sex
+    = form.label :sex, "Male", value: "M"
+    = form.radio_button :sex, "Male"
+    = form.label :sex, "Female", value: "F"
+    = form.radio_button :sex, "Female"
+
+  %div.field
+    = form.label :favorite_color
+    = form.color_field :favorite_color
+  %div.field
+    = form.label :prog_languages
+    = form.select :prog_languages, options_for_select([["Ruby", "ruby"],["Java", "java"]]), {}, { multiple: true, size: 2 }
+  %div.actions
+    = form.submit

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711005311) do
+ActiveRecord::Schema.define(version: 20170712162437) do
 
   create_table "registrations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 20170711005311) do
     t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "accept_terms", default: false
+    t.string "sex"
+    t.string "favorite_color"
+    t.string "prog_languages"
   end
 
 end
