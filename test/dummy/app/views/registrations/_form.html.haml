@@ -17,21 +17,26 @@
   %div.field
     = form.label :date_of_birth
     = form.date_select :date_of_birth, id: :registration_date_of_birth
+  
   %div.field
-    = form.label :accept_terms
     = form.check_box :accept_terms, {id: :accept_terms}, "true", nil
-  %div.field
-    = form.label :sex
-    = form.label :sex, "Male", value: "M"
-    = form.radio_button :sex, "Male"
-    = form.label :sex, "Female", value: "F"
-    = form.radio_button :sex, "Female"
+    = form.label :accept_terms, "I accept the terms", style: "display: inline;"
+    
+  
+  %fieldset{style: "border: solid 1px gray; border-radius: 7px; width: 200px; padding: 5px; margin: 5px;" }
+    %span
+      = form.label :sex do
+        %b Sex
+      = form.radio_button :sex, "Male", style: "display: inline;"
+      = form.label :sex, "Male", value: "M", style: "display: inline;"
+      = form.radio_button :sex, "Female", style: "display: inline;"
+      = form.label :sex, "Female", value: "F", style: "display: inline;"
 
   %div.field
     = form.label :favorite_color
     = form.color_field :favorite_color
   %div.field
     = form.label :prog_languages
-    = form.select :prog_languages, options_for_select([["Ruby", "ruby"],["Java", "java"]]), {}, { multiple: true, size: 2 }
+    = form.select :prog_languages, options_for_select([["Ruby", "ruby"],["Java", "java"]]), {}, { multiple: true, size: 3 }
   %div.actions
     = form.submit
