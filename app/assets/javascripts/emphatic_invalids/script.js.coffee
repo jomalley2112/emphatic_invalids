@@ -7,9 +7,14 @@ resetTabIndex = (form) ->
   # clear all (including valid fields) tab indexes
   $(form).find(":input").removeAttr( "tabindex" )
 
-window.highlightInvalidFields = (form, errorStr) ->
+window.highlightInvalidFields = (form, data) ->
   resetTabIndex(form)
+  errorStr = data.error().responseText
   errors = $.parseJSON(errorStr)
+  
+  ttElSelector = form.dataset.eiTooltipElement #could be undefined
+  hilightElSelector = form.dataset.eiHighlightElement
+
   i = 1
   for own fieldName, value of errors
     
@@ -21,27 +26,36 @@ window.highlightInvalidFields = (form, errorStr) ->
     
     $(input).attr("tabindex", i++) #set tab order for just invalid fields
     
-    input.addClass("validation-error")
-    
-    $(input).tooltip(
+    input.addClass("invalid-field")
+
+    hilightElSelector = $(input).attr("data-ei-highlight-element") ? hilightElSelector
+    highlightElement = if $(input).closest(hilightElSelector).length then $(input).closest(hilightElSelector) else input
+    highlightElement.addClass("highlight-error") #element other than input if some data-attribute passed
+
+    ttElSelector = $(input).attr("data-ei-tooltip-element") ? ttElSelector #override form-level if set on input
+    #closest matching parent to the input or the input element itself
+    tooltipElement = if $(input).closest(ttElSelector).length then $(input).closest(ttElSelector) else input 
+    $(tooltipElement).tooltip(
       tooltipClass: "error-tooltips"
       position:
         my: "left+15 center", at: "right center"
     )
-   
-    $(input).attr("title", value) #set title so tooltip displays it
+    $(tooltipElement).attr("title", value) #set title so tooltip displays it
    
     $(input).on('change', ->
-      $(this).removeClass("validation-error")
+      $(this).removeClass("invalid-field")
+      debugger #The problem with the next line is the variable keeps changing in each loop
+      $(highlightElement).removeClass("highlight-error")
     )
 
-  $(form).find(".validation-error").first().focus() #set focus to the first highlighted field
+  #TODO: Possibly build up an array of objects in the loop and then grab the first element
+  $(form).find(".invalid-field").first().focus() #set focus to the first highlighted field
   
   btn = $(form).find("input[type='submit'], button[type='submit'], input[type='image']").first()
   btn.attr("tabindex", i++) #submit button gets next tab order after all invalid fields
 
 $(document).ready( ->
   $("body").on("ajax:error", "form[data-highlight-errors='true']", (event, data, status, xhr) ->
-    window.highlightInvalidFields(this, data.error().responseText)
+    window.highlightInvalidFields(this, data)
   )
 )

@@ -1,8 +1,7 @@
 module RenderHelper
 	
 	def emphasize_invalids(resource, format)
-		# binding.pry
-    flash[:error] = error_message(resource) 
+		# flash[:error] = error_message(resource) #TODO may want to make this an option 
     format.js { render json: resource.errors, status: :unprocessable_entity }
   end
 
