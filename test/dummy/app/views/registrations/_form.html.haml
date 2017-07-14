@@ -19,22 +19,21 @@
     = form.date_select :date_of_birth, id: :registration_date_of_birth
   
   %div.field{ style: "width: 150px;" }
-    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field" } }, "true", nil
+    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field", "ei-highlight-element" => ".field" } }, "true", nil
     = form.label :accept_terms, "I accept the terms", style: "display: inline;"
     
-  
   %fieldset.rb-group
     %span
       = form.label :sex do
         %b Sex
-      = form.radio_button :sex, "Male", style: "display: inline;"
+      = form.radio_button :sex, "Male", style: "display: inline;", data: { "ei-tooltip-element" => "fieldset.rb-group", "ei-highlight-element" => "fieldset.rb-group" }
       = form.label :sex, "Male", value: "M", style: "display: inline;"
       = form.radio_button :sex, "Female", style: "display: inline;"
       = form.label :sex, "Female", value: "F", style: "display: inline;"
 
   %div.field
     = form.label :favorite_color
-    = form.color_field :favorite_color
+    = form.color_field :favorite_color, data: { "ei-highlight-element" => ".field" }
   %div.field
     = form.label :prog_languages
     = form.select :prog_languages, options_for_select([["Ruby", "ruby"],["Java", "java"]]), {}, { multiple: true, size: 3 }

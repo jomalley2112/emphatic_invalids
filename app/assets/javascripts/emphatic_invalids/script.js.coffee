@@ -2,6 +2,25 @@
 #= require jquery-ui/tooltip
 #= require jquery_ujs
 
+parentOrSelf = (input, selector) ->
+  if $(input).closest(selector).length then $(input).closest(selector) else input
+
+mostTargetedElement = (input, attr) ->
+  selector = $(input).attr(attr) ? $(input.form).attr(attr)
+  element = parentOrSelf(input, selector)
+
+class InvalidField
+  constructor: (@input, @value) ->
+    @input.addClass("invalid-field")
+    highlightElement = mostTargetedElement(@input, "data-ei-highlight-element")
+    highlightElement.addClass("highlight-error")
+    tooltipElement = mostTargetedElement(@input, "data-ei-tooltip-element")   
+    $(tooltipElement).tooltip(
+      tooltipClass: "error-tooltips"
+      position:
+        my: "left+15 center", at: "right center"
+    )
+    $(tooltipElement).attr("title", @value) #set title so tooltip displays it
 
 resetTabIndex = (form) ->
   # clear all (including valid fields) tab indexes
@@ -11,44 +30,28 @@ window.highlightInvalidFields = (form, data) ->
   resetTabIndex(form)
   errorStr = data.error().responseText
   errors = $.parseJSON(errorStr)
-  
-  ttElSelector = form.dataset.eiTooltipElement #could be undefined
-  hilightElSelector = form.dataset.eiHighlightElement
-
   i = 1
   for own fieldName, value of errors
     
     # name and/or id attribute equals exactly "fieldName"
-    # name attribute ends in "[fieldName]", or 
+    # name attribute ends in "[fieldName]" or "[fieldName][]", or 
     # data-ei-field-alias attribute equals fieldName
 
-    input = $(form).find("[name='"+fieldName+"'], [id='"+fieldName+"'], [name$='["+fieldName+"]'], [data-ei-field-alias='"+fieldName+"']")
+    input = $(form).find("[name='"+fieldName+"'], [id='"+fieldName+"'], [name$='["+fieldName+"]'], [name$='["+fieldName+"][]'], [data-ei-field-alias='"+fieldName+"']")
     
     $(input).attr("tabindex", i++) #set tab order for just invalid fields
     
-    input.addClass("invalid-field")
+    invalidField = new InvalidField input, value
 
-    hilightElSelector = $(input).attr("data-ei-highlight-element") ? hilightElSelector
-    highlightElement = if $(input).closest(hilightElSelector).length then $(input).closest(hilightElSelector) else input
-    highlightElement.addClass("highlight-error") #element other than input if some data-attribute passed
-
-    ttElSelector = $(input).attr("data-ei-tooltip-element") ? ttElSelector #override form-level if set on input
-    #closest matching parent to the input or the input element itself
-    tooltipElement = if $(input).closest(ttElSelector).length then $(input).closest(ttElSelector) else input 
-    $(tooltipElement).tooltip(
-      tooltipClass: "error-tooltips"
-      position:
-        my: "left+15 center", at: "right center"
-    )
-    $(tooltipElement).attr("title", value) #set title so tooltip displays it
-   
     $(input).on('change', ->
+      highlightedElement = mostTargetedElement(this, "data-ei-highlight-element")
+      tooltipElement = mostTargetedElement(this, "data-ei-tooltip-element")
+      $(highlightedElement).removeClass("highlight-error")
+      $(tooltipElement).tooltip("destroy")
+      $(tooltipElement).removeAttr("title")
       $(this).removeClass("invalid-field")
-      debugger #The problem with the next line is the variable keeps changing in each loop
-      $(highlightElement).removeClass("highlight-error")
     )
 
-  #TODO: Possibly build up an array of objects in the loop and then grab the first element
   $(form).find(".invalid-field").first().focus() #set focus to the first highlighted field
   
   btn = $(form).find("input[type='submit'], button[type='submit'], input[type='image']").first()
