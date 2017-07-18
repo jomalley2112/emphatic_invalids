@@ -35,7 +35,7 @@
     = form.label :favorite_color
     = form.color_field :favorite_color, data: { "ei-highlight-element" => ".field" }
   %div.field
-    = form.label :prog_languages
-    = form.select :prog_languages, options_for_select([["Ruby", "ruby"],["Java", "java"]]), {}, { multiple: true, size: 3 }
+    = form.label :prog_language_ids
+    = form.select :prog_language_ids, options_from_collection_for_select(ProgLanguage.all.order(:name), "id", "name"), {}, { multiple: true, size: 3, id: "known_prog_language_ids" }
   %div.actions
     = form.submit

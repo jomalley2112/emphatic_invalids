@@ -47,7 +47,7 @@ window.highlightInvalidFields = (form, data) ->
       highlightedElement = mostTargetedElement(this, "data-ei-highlight-element")
       tooltipElement = mostTargetedElement(this, "data-ei-tooltip-element")
       $(highlightedElement).removeClass("highlight-error")
-      $(tooltipElement).tooltip("destroy")
+      $(tooltipElement).tooltip("destroy") if !!$(tooltipElement).data("ui-tooltip")
       $(tooltipElement).removeAttr("title")
       $(this).removeClass("invalid-field")
     )

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712162437) do
+ActiveRecord::Schema.define(version: 20170718010610) do
+
+  create_table "known_prog_languages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "registration_id"
+    t.integer "prog_language_id"
+  end
+
+  create_table "prog_languages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+  end
 
   create_table "registrations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name"
@@ -24,7 +33,6 @@ ActiveRecord::Schema.define(version: 20170712162437) do
     t.boolean "accept_terms", default: false
     t.string "sex"
     t.string "favorite_color"
-    t.string "prog_languages"
   end
 
 end
