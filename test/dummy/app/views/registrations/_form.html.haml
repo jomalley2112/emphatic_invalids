@@ -17,10 +17,6 @@
   %div.field
     = form.label :date_of_birth
     = form.date_select :date_of_birth, id: :registration_date_of_birth
-  
-  %div.field{ style: "width: 150px;" }
-    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field", "ei-highlight-element" => ".field" } }, "true", nil
-    = form.label :accept_terms, "I accept the terms", style: "display: inline;"
     
   %fieldset.rb-group
     %span
@@ -28,7 +24,7 @@
         %b Sex
       = form.radio_button :sex, "Male", style: "display: inline;", data: { "ei-tooltip-element" => "fieldset.rb-group", "ei-highlight-element" => "fieldset.rb-group" }
       = form.label :sex, "Male", value: "M", style: "display: inline;"
-      = form.radio_button :sex, "Female", style: "display: inline;"
+      = form.radio_button :sex, "Female", style: "display: inline;", data: { "ei-tooltip-element" => "fieldset.rb-group", "ei-highlight-element" => "fieldset.rb-group" }
       = form.label :sex, "Female", value: "F", style: "display: inline;"
 
   %div.field
@@ -37,5 +33,9 @@
   %div.field
     = form.label :prog_language_ids
     = form.select :prog_language_ids, options_from_collection_for_select(ProgLanguage.all.order(:name), "id", "name"), {}, { multiple: true, size: 3, id: "known_prog_language_ids" }
+  %div.field{ style: "width: 150px;" }
+    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field", "ei-highlight-element" => ".field" } }, "true", nil
+    = form.label :accept_terms, "I accept the terms", style: "display: inline;"
+
   %div.actions
     = form.submit
