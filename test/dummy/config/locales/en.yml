@@ -31,3 +31,20 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    errors:
+      models:
+        registration:
+          attributes:
+            age:
+              not_a_number: "Please enter your age"
+              greater_than_or_equal_to: "You need to be 21 or over"
+            sex: 
+              blank: "Please choose one"
+            prog_language_ids:
+              blank: "Please choose one or more"
+            favorite_color:
+              invalid: "Please choose a color other than black or white"
+      messages:  
+        blank: "Please fill in"
