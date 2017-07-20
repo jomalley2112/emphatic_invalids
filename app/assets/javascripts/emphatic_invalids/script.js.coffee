@@ -57,8 +57,7 @@ window.highlightInvalidFields = (form, data) ->
   btn = $(form).find("input[type='submit'], button[type='submit'], input[type='image']").first()
   btn.attr("tabindex", i++) #submit button gets next tab order after all invalid fields
 
-$(document).ready( ->
-  $("body").on("ajax:error", "form[data-highlight-errors='true']", (event, data, status, xhr) ->
+window.registerEmphaticInvalidForms = (selector="form[data-remote=true]") ->
+  $("body").on("ajax:error", selector, (event, data, status, xhr) ->
     window.highlightInvalidFields(this, data)
   )
-)

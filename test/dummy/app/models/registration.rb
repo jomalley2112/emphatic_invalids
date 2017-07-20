@@ -8,7 +8,7 @@ class Registration < ApplicationRecord
 	validates :sex, presence: true
 	validates :favorite_color, format: { without: /\A#(000000|FFFFFF)\z/i }
 	validates :prog_language_ids, presence: true
-	validates :accept_terms, acceptance: true
+	validates :accept_terms, acceptance: { accept: "accepted" }
 
 	def kpl_selections
 		known_prog_languages.pluck(:prog_language_id)

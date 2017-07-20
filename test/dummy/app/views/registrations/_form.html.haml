@@ -34,7 +34,7 @@
     = form.label :prog_language_ids
     = form.select :prog_language_ids, options_from_collection_for_select(ProgLanguage.all.order(:name), "id", "name", registration.kpl_selections), {}, { multiple: true, size: 3, id: "known_prog_language_ids" }
   %div.field{ style: "width: 150px;" }
-    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field", "ei-highlight-element" => ".field" } }, "true", nil
+    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field", "ei-highlight-element" => ".field" } }, "accepted", "denied"
     = form.label :accept_terms, "I accept the terms", style: "display: inline;"
 
   %div.actions
