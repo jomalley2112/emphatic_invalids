@@ -14,5 +14,5 @@
 #= require emphatic_invalids/script.coffee
 
 $(document).ready( ->
-  window.registerEmphaticInvalidForms()
+  window.EmphaticInvalids.registerForms()
 )

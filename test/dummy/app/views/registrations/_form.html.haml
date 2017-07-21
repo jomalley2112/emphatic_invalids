@@ -34,8 +34,24 @@
     = form.label :prog_language_ids
     = form.select :prog_language_ids, options_from_collection_for_select(ProgLanguage.all.order(:name), "id", "name", registration.kpl_selections), {}, { multiple: true, size: 3, id: "known_prog_language_ids" }
   %div.field{ style: "width: 150px;" }
-    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field", "ei-highlight-element" => ".field" } }, "accepted", "denied"
+    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field", "ei-highlight-element" => ".field" } }, true, false
     = form.label :accept_terms, "I accept the terms", style: "display: inline;"
+
+  %div{style: "width: 300px;"}
+    %b Address
+    = form.fields model: @address do |address|
+      %div.field
+        = address.label :street
+        = address.text_field :street
+      %div.field
+        = address.label :city
+        = address.text_field :city
+      %div.field
+        = address.label :state
+        = address.text_field :state
+      %div.field
+        = address.label :zip
+        = address.text_field :zip
 
   %div.actions
     = form.submit

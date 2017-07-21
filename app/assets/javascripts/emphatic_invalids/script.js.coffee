@@ -26,7 +26,7 @@ resetTabIndex = (form) ->
   # clear all (including valid fields) tab indexes
   $(form).find(":input").removeAttr( "tabindex" )
 
-window.highlightInvalidFields = (form, data) ->
+highlightInvalidFields = (form, data) ->
   resetTabIndex(form)
   errorStr = data.error().responseText
   errors = $.parseJSON(errorStr)
@@ -57,7 +57,8 @@ window.highlightInvalidFields = (form, data) ->
   btn = $(form).find("input[type='submit'], button[type='submit'], input[type='image']").first()
   btn.attr("tabindex", i++) #submit button gets next tab order after all invalid fields
 
-window.registerEmphaticInvalidForms = (selector="form[data-remote=true]") ->
+window.EmphaticInvalids = {}
+window.EmphaticInvalids.registerForms = (selector="form[data-remote=true]") ->
   $("body").on("ajax:error", selector, (event, data, status, xhr) ->
-    window.highlightInvalidFields(this, data)
+    highlightInvalidFields(this, data)
   )

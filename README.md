@@ -8,7 +8,7 @@ Utilizes Rails server-side model validations to display client-side error messag
 Register your forms by adding the following to a javascript (in this example coffeescript):
 ```coffeescript
 $(document).ready( ->
-  window.registerEmphaticInvalidForms()
+  window.EmphaticInvalids.registerForms()
 )
 ```
 The `registerEmphaticInvalidForms()` method takes an optional parameter specifying the selector for which elements should be registered to display errors (default value is `"form[data-remote=true]"`)
@@ -25,7 +25,7 @@ If you don't want to register *all* remote forms you can always add you own attr
 and just specify that selector in the register call:
 ```coffeescript
 $(document).ready( ->
-  window.registerEmphaticInvalidForms("form[data-highlight-errors=true"])
+  window.EmphaticInvalids.registerForms("form[data-highlight-errors=true"])
 )
 ```
 
