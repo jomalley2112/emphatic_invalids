@@ -31,12 +31,13 @@ highlightInvalidFields = (form, data) ->
   errorStr = data.error().responseText
   errors = $.parseJSON(errorStr)
   i = 1
+
   for own fieldName, value of errors
     
     # name and/or id attribute equals exactly "fieldName"
     # name attribute ends in "[fieldName]" or "[fieldName][]", or 
     # data-ei-field-alias attribute equals fieldName
-
+    fieldName = fieldName.replace(".", "_attributes][") #if it contains dots it is a nested attribute
     input = $(form).find("[name='"+fieldName+"'], [id='"+fieldName+"'], [name$='["+fieldName+"]'], [name$='["+fieldName+"][]'], [data-ei-field-alias='"+fieldName+"']").not(":hidden")
 
     $(input).attr("tabindex", i++) #set tab order for just invalid fields
