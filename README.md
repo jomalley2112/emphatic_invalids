@@ -57,10 +57,10 @@ $(document).ready( ->
 Inside each appropriate controller action, which is usually just *update* and *create* you will need to call the `emphasize_invalids` method like this:
 ```ruby
 def update
-	...
+	# ...
 	respond_to do |format|
     if @post.save
-      ...
+      # ...
       format.js { render :success }
     else
       emphasize_invalids(@post, format)
@@ -94,7 +94,7 @@ end
 
 
 
-##Particulars{#partic}
+##Particulars <a id="partic"></a>
 Based on each validation error's key the messages are mapped to their corresponding form input elements when an element's:
 
  * name attribute equals the key exactly
@@ -109,6 +109,7 @@ When the actual form element (something like a Rails date_select) doesn't match 
   = form.date_select :date_of_birth, id: :registration_date_of_birth
 ```
 
+If you aren't getting the results you expect it may help to view the actual error data being sent by the gem. Add a hidden element to your form with `id="log-invalids"` and the EmphaticInvalids data will be logged to your browser's javascript console.
 
 
 ## Contributing

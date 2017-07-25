@@ -29,6 +29,7 @@ resetTabIndex = (form) ->
 highlightInvalidFields = (form, data) ->
   resetTabIndex(form)
   errorStr = data.error().responseText
+  console.log("EmphaticInvalids: "+errorStr) if !!$(form).find("#log-invalids").length > 0
   errors = $.parseJSON(errorStr)
   i = 1
 
