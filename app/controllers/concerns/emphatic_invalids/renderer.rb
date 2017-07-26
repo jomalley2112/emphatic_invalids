@@ -1,4 +1,4 @@
-module RenderHelper
+module EmphaticInvalids::Renderer
 	
 	def emphasize_invalids(resource, format)
 		# flash[:error] = error_message(resource) #TODO may want to make this an option
