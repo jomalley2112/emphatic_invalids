@@ -48,7 +48,7 @@ $(document).ready( ->
 #   window.EmphaticInvalids.registerForms()
 #  )
 ```
-The `registerForms()` method takes an optional parameter specifying the selector for which elements should be registered to display errors (default value is `"form[data-remote=true]"`)
+The `registerForms()` method takes an optional parameter specifying the selector for which elements (usually `<form>`s) should use the gem (the default value is `"form[data-remote=true]"`)
 
 _Optional:_
 
@@ -83,16 +83,17 @@ end
 ```
 
 #### Optional
- * By default the [input element](#partic) itself will be highlighted, but that can be overwritten at the form or field level with data attribute _data-ei-highlight-element_ ******
+By default the [input element](#partic) itself will be highlighted, but that can be overwritten at the form or field level with data attribute _data-ei-highlight-element_ ******
 ```HTML
 <input type="text" name="author" data-ei-highlight-element=".field" />
 ```
- * By default the tooltip will be applied to the matching input element itself, but that can be overwritten at the form or field level with a data attribute _data-ei-tooltip-element_ ****** 
+
+By default the tooltip will be applied to the matching input element itself, but that can be overwritten at the form or field level with a data attribute _data-ei-tooltip-element_ ****** 
 ```HTML
 <input type="radio" name="choice1" data-ei-tooltip-element="fieldset.rb-group" />
 ```
 
-**\*\*** *The value of the data-ei-highlight-element attribute should be a selector that will be evaluated in the context of the invalid input's closest matching ancestor element*
+**\*\*** *The value of the data-ei-highlight-element attribute should be a selector that will be evaluated in the context of the invalid input's closest matching ancestor*
 
 #### Styling
 The styling of the highlighted fields and the tooltips can be overriden by defining the CSS class `.highlight-error` and/or `.error-tooltips` anywhere _after_ `require emphatic_invalids/style.css`
