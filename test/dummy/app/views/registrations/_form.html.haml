@@ -1,4 +1,4 @@
-= form_with(model: registration, html: {style: "width: 700px;"}, local: false, data: { "highlight-errors" => true }) do |form|
+= form_with(model: registration, html: {style: "width: 700px;"}, local: false, data: { "highlight-errors" => true, "ei-tooltip-position" => '{"my": "left+2 center", "at": "right center"}' }) do |form|
   = form.hidden_field "log-invalids", id: "log-invalids"
   %div.field
     = form.label :first_name
@@ -44,7 +44,7 @@
         = address.label :zip
         = address.text_field :zip
 
-  %div.field{ style: "width: 150px;" }
+  %div.field{ style: "width: 150px;", "data-ei-tooltip-position" => '{"my": "left+50 center", "at": "right center"}' }
     = form.label :favorite_color
     = form.color_field :favorite_color, data: { "ei-highlight-element" => ".field", "ei-tooltip-element" => ".field" }
   %div.field

@@ -6,19 +6,21 @@ parentOrSelf = (input, selector) ->
   if $(input).closest(selector).length then $(input).closest(selector) else input
 
 mostTargetedElement = (input, attr) ->
-  selector = $(input).attr(attr) ? $(input.form).attr(attr)
+  selector = $(input).attr(attr) ? $(input.closest("form")).attr(attr)
   element = parentOrSelf(input, selector)
+
+tooltipPosition = (element, attr="data-ei-tooltip-position") ->
+  $(element).attr(attr) ? $(element.closest("form")).attr(attr) ? '{"my": "left+15 center", "at": "right center"}'
 
 class InvalidField
   constructor: (@input, @value) ->
     @input.addClass("invalid-field")
     highlightElement = mostTargetedElement(@input, "data-ei-highlight-element")
     highlightElement.addClass("highlight-error")
-    tooltipElement = mostTargetedElement(@input, "data-ei-tooltip-element")   
+    tooltipElement = mostTargetedElement(@input, "data-ei-tooltip-element")
     $(tooltipElement).tooltip(
       tooltipClass: "error-tooltips"
-      position:
-        my: "left+15 center", at: "right center"
+      position: $.parseJSON(tooltipPosition(tooltipElement))
     )
     $(tooltipElement).attr("title", @value) #set title so tooltip displays it
 

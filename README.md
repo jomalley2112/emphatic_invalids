@@ -82,7 +82,7 @@ def update
 end
 ```
 
-#### Optional
+### Optional
 By default the [input element](#partic) itself will be highlighted, but that can be overwritten at the form or field level with data attribute _data-ei-highlight-element_ ******
 ```HTML
 <input type="text" name="author" data-ei-highlight-element=".field" />
@@ -94,6 +94,13 @@ By default the tooltip will be applied to the matching input element itself, but
 ```
 
 **\*\*** *The value of the data-ei-highlight-element attribute should be a selector that will be evaluated in the context of the invalid input's closest matching ancestor*
+
+By default the tooltip's position will be centered and 15 pixels to the right of it's element. The position can be overridden at the form or element level by setting a data attribute _data-ei-tooltip-position_ on the element. Make sure if you have overridden the tooltip element that the attribute is on that element. The value needs to be valid JSON in the format of the `options` argument expected by the [jQuery position method](https://api.jqueryui.com/position/).
+```HTML
+<form data-ei-tooltip-position='{"my": "left+2 center", "at": "right center"}'>
+  <!-- ... -- >
+</form>
+```
 
 #### Styling
 The styling of the highlighted fields and the tooltips can be overriden by defining the CSS class `.highlight-error` and/or `.error-tooltips` anywhere _after_ `require emphatic_invalids/style.css`
