@@ -8,7 +8,7 @@
 
 .highlight-error {
 	border: solid 2px #a94442;
-  background-color: inherit;
+  /*background-color: inherit;*/
 }
 
 .error-tooltips {

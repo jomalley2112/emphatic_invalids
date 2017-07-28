@@ -43,6 +43,12 @@
       %div.field
         = address.label :zip
         = address.text_field :zip
+        %div{style: "padding-left: 30px"}
+          %b County
+          = address.fields_for :county, @county do |county|
+            %div.field
+              = county.label :name
+              = county.text_field :name
 
   %div.field{ style: "width: 150px;", "data-ei-tooltip-position" => '{"my": "left+50 center", "at": "right center"}' }
     = form.label :favorite_color

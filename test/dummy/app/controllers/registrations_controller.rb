@@ -14,11 +14,13 @@ class RegistrationsController < ApplicationController
   def new
     @registration = Registration.new
     @address = @registration.build_address
+    @county = @address.build_county
   end
 
   # GET /registrations/1/edit
   def edit
     @address = @registration.address || @registration.build_address
+    @county = @address.county || @address.build_county
   end
 
   # POST /registrations
@@ -64,6 +66,6 @@ class RegistrationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def registration_params
-      params.require(:registration).permit(:first_name, :middle_initial, :last_name, :email, :age, :date_of_birth, :accept_terms, :sex, :favorite_color, { prog_language_ids: [] }, address_attributes: [:id, :street, :city, :state, :zip])
+      params.require(:registration).permit(:first_name, :middle_initial, :last_name, :email, :age, :date_of_birth, :accept_terms, :sex, :favorite_color, { prog_language_ids: [] }, address_attributes: [ :id, :street, :city, :state, :zip, county_attributes: [:id, :name] ])
     end
 end

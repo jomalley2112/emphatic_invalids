@@ -12,7 +12,14 @@ Utilizes Rails server-side model validations to display client-side error messag
 
 
 
-***** *For the best field navigation experience the model validations should be defined in the same order that the fields appear in the form*
+***** *For the best field navigation experience the model validations should be declared in the same order that the fields appear in the form. This includes nested attributes so that their associations and validations are declared in the same order of the form also.*
+```ruby
+  validates :first_name, :last_name, :email, presence: true
+  validates :age, numericality: { greater_than_or_equal_to: 21 }
+  has_one :address
+  accepts_nested_attributes_for :address
+  validates :accept_terms, acceptance: { accept: true }
+```
 
 
 
