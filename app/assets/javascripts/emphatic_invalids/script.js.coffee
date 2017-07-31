@@ -9,8 +9,17 @@ mostTargetedElement = (input, attr) ->
   selector = $(input).attr(attr) ? $(input.closest("form")).attr(attr)
   element = parentOrSelf(input, selector)
 
+showedPosError = false
 tooltipPosition = (element, attr="data-ei-tooltip-position") ->
-  $(element).attr(attr) ? $(element.closest("form")).attr(attr) ? '{"my": "left+15 center", "at": "right center"}'
+  posStr = $(element).attr(attr) ? $(element.closest("form")).attr(attr) ? '{"my": "left+15 center", "at": "right center"}'
+  try
+    $.parseJSON(posStr)
+  catch error
+    unless showedPosError
+      console.log "(Check the format of the value of any ei-tooltip-position attributes you may be using.)"
+      console.log error
+      showedPosError = true
+    posStr = $.parseJSON('{"my": "left+15 center", "at": "right center"}')
 
 class InvalidField
   constructor: (@input, @value) ->
@@ -20,7 +29,7 @@ class InvalidField
     tooltipElement = mostTargetedElement(@input, "data-ei-tooltip-element")
     $(tooltipElement).tooltip(
       tooltipClass: "error-tooltips"
-      position: $.parseJSON(tooltipPosition(tooltipElement))
+      position: tooltipPosition(tooltipElement)
     )
     $(tooltipElement).attr("title", @value) #set title so tooltip displays it
 
@@ -32,7 +41,13 @@ highlightInvalidFields = (form, data) ->
   resetTabIndex(form)
   errorStr = data.error().responseText
   console.log("EmphaticInvalids: "+errorStr) if !!$(form).find("#log-invalids").length > 0
-  errors = $.parseJSON(errorStr)
+  try
+    errors = $.parseJSON(errorStr)
+  catch error
+    console.log error
+    alert("Make sure all required fields have been filled in and the values are in the proper format. For more details view your browser's console log.")
+    errors = {}
+
   i = 1
 
   for own fieldName, value of errors
@@ -41,7 +56,6 @@ highlightInvalidFields = (form, data) ->
     # name attribute ends in "[fieldName]" or "[fieldName][]", or 
     # data-ei-field-alias attribute equals fieldName
     fieldName = fieldName.replace(/\./g, "_attributes][") #if it contains dots it is a nested attribute
-    console.log("fieldName = "+fieldName)
     input = $(form).find("[name='"+fieldName+"'], [id='"+fieldName+"'], [name$='["+fieldName+"]'], [name$='["+fieldName+"][]'], [data-ei-field-alias='"+fieldName+"']").not(":hidden")
 
     $(input).attr("tabindex", i++) #set tab order for just invalid fields
