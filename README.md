@@ -4,7 +4,7 @@ Utilizes Rails server-side model validations to display client-side error messag
 ------
 
 *screenshot of invalid form submission*
-![Example Screenshot](readme-assets/invalid-submission-screenshot "screenshot of invalid form submission.")
+![Example Screenshot](readme_assets/invalid_submission_screenshot.png "screenshot of invalid form submission.")
 
 ------
 
@@ -43,7 +43,7 @@ In one of your javascript files require `emphatic_invalids/script.coffee`
 ## Usage
 
 #### Javascript
-Register your forms by adding the following to one of your project's javascript/coffeescript:
+Register your forms by adding the following to one of your project's javascript/coffeescript files:
 ```coffeescript
 $(document).ready( ->
   window.EmphaticInvalids.registerForms()
@@ -138,7 +138,7 @@ _If you aren't getting the results you expect it may be helpful to view the actu
 Just going live with this. Please send any comments or suggestions.
 
 ## TODO:
- * Cleaner error to element mapping
+
 
 ## License
 
