@@ -1,6 +1,13 @@
 # Emphatic Invalids
 Utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions.
 
+------
+
+*screenshot of invalid form submission*
+
+![Example Screenshot](readme_assets/invalid_submission_screenshot.png "screenshot of invalid form submission.")
+
+------
 
 
 ## Features
@@ -9,17 +16,11 @@ Utilizes Rails server-side model validations to display client-side error messag
  * Rails validation error message are displayed as a jQuery UI tooltip whenever an invalid field has focus or is hovered over. This way when there are several invalid fields the messages aren't all displayed at once.
  * Adjusts the form fields' tab index***** so the user can easily tab from one invalid field to the next and finally to a submit button.
  * Once an invalid field's value has been changed the highlight is removed from it.
+ * Also works with deeply nested attributes
 
 
 
-***** *For the best field navigation experience the model validations should be declared in the same order that the fields appear in the form. This includes nested attributes so that their associations and validations are declared in the same order of the form also.*
-```ruby
-  validates :first_name, :last_name, :email, presence: true
-  validates :age, numericality: { greater_than_or_equal_to: 21 }
-  has_one :address
-  accepts_nested_attributes_for :address
-  validates :accept_terms, acceptance: { accept: true }
-```
+***** *For the best field navigation experience the model validations should be declared in the same order that the fields appear in the form. This includes nested attributes so that their associations and validations are declared in the same order of the form also. Compare views/registrations/_form.html.haml with the models in the test/dummy application for an example*
 
 
 
@@ -43,7 +44,7 @@ In one of your javascript files require `emphatic_invalids/script.coffee`
 ## Usage
 
 #### Javascript
-Register your forms by adding the following to one of your project's javascripts (in this example coffeescript):
+Register your forms by adding the following to one of your project's javascript/coffeescript files:
 ```coffeescript
 $(document).ready( ->
   window.EmphaticInvalids.registerForms()
@@ -55,9 +56,9 @@ $(document).ready( ->
 #   window.EmphaticInvalids.registerForms()
 #  )
 ```
-The `registerForms()` method takes an optional parameter specifying the selector for which elements (usually `<form>`s) should use the gem (the default value is `"form[data-remote=true]"`)
+The `registerForms()` method takes an optional parameter allowing you to select which `<form>` elements in your application should utilize the gem (the default value is `"form[data-remote=true]"`)
 
-_Optional:_
+_Example:_
 
 If you don't want to register *all* remote forms you can always add you own attribute to the desired forms: 
 
@@ -81,7 +82,7 @@ def update
   respond_to do |format|
     if @post.save
       # ...
-      format.js { render :success }
+      format.js { render :success } #successfully saved...do whatever's appropriate here
     else
       emphasize_invalids(@post, format)
     end
@@ -90,7 +91,9 @@ end
 ```
 
 ### Optional
-By default the [input element](#markdown-header-particulars) itself will be highlighted, but that can be overwritten at the form or field level with data attribute _data-ei-highlight-element_ ******
+_Note: All the following options are used in the test/dummy application. See the views/registrations/_form.html.haml partial_
+
+By default the input element ([view the particlulars](#markdown-header-particulars)) itself will be highlighted, but that can be overwritten at the form or field level with data attribute _data-ei-highlight-element_ ******
 ```HTML
 <input type="text" name="author" data-ei-highlight-element=".field" />
 ```
@@ -102,7 +105,7 @@ By default the tooltip will be applied to the matching input element itself, but
 
 **\*\*** *The value of the data-ei-highlight-element attribute should be a selector that will be evaluated in the context of the invalid input's closest matching ancestor*
 
-By default the tooltip's position will be centered vertically and 15 pixels to the right of it's target element. The position can be overridden at the form or element level by setting a data attribute _data-ei-tooltip-position_ on the target element. Make sure if you have overridden the target element that the attribute is on that specific element. The value needs to be a valid JSON string in the format of the `options` argument expected by the [jQuery position method](https://api.jqueryui.com/position/).
+By default the tooltip's position will be centered vertically and 15 pixels to the right of it's target element. The position can be overridden at the form or element level by setting a data attribute _data-ei-tooltip-position_ on the target element. Make sure if you have overridden the target element that the attribute is placed on that specific element. The value needs to be a valid JSON string in the format of the `options` argument expected by the [jQuery position method](https://api.jqueryui.com/position/).
 ```HTML
 <form data-remote="true" data-ei-tooltip-position='{"my": "left+2 center", "at": "right center"}'>
   <!-- ... -->
@@ -110,7 +113,7 @@ By default the tooltip's position will be centered vertically and 15 pixels to t
 ```
 
 #### Styling
-The styling of the highlighted fields and the tooltips can be overriden by defining the CSS class `.highlight-error` and/or `.error-tooltips` anywhere _after_ `require emphatic_invalids/style.css`
+The styling of the highlighted fields and the tooltips can be adjusted by defining the CSS class `.highlight-error` and/or `.error-tooltips` anywhere _after_ `require emphatic_invalids/style.css`
 
 
 ## Particulars
@@ -133,11 +136,9 @@ _If you aren't getting the results you expect it may be helpful to view the actu
 
 ## Contributing
 
-Contribution directions go here.
+Just going live with this. Please send any comments or suggestions.
 
 ## TODO:
- * Better error to element mapping
- * Allow errors for nested attributes 
 
 
 ## License
