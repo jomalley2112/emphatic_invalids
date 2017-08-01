@@ -4,7 +4,7 @@ Utilizes Rails server-side model validations to display client-side error messag
 ------
 
 *screenshot of invalid form submission*
-![Example Screenshot](/readme-assets/invalid-submission-screenshot "screenshot of invalid form submission.")
+![Example Screenshot](readme-assets/invalid-submission-screenshot "screenshot of invalid form submission.")
 
 ------
 
