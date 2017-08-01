@@ -9,16 +9,16 @@ mostTargetedElement = (input, attr) ->
   selector = $(input).attr(attr) ? $(input.closest("form")).attr(attr)
   element = parentOrSelf(input, selector)
 
-showedPosError = false
+showPosException = true
 tooltipPosition = (element, attr="data-ei-tooltip-position") ->
   posStr = $(element).attr(attr) ? $(element.closest("form")).attr(attr) ? '{"my": "left+15 center", "at": "right center"}'
   try
     $.parseJSON(posStr)
-  catch error
-    unless showedPosError
-      console.log "(Check the format of the value of any ei-tooltip-position attributes you may be using.)"
-      console.log error
-      showedPosError = true
+  catch exception
+    if showPosException
+      console.error "EmphaticInvalids gem: Check the format of the value of any ei-tooltip-position attributes you may be using. They need to be valid JSON strings."
+      console.error exception
+      showPosException = false
     posStr = $.parseJSON('{"my": "left+15 center", "at": "right center"}')
 
 class InvalidField
@@ -43,8 +43,8 @@ highlightInvalidFields = (form, data) ->
   console.log("EmphaticInvalids: "+errorStr) if !!$(form).find("#log-invalids").length > 0
   try
     errors = $.parseJSON(errorStr)
-  catch error
-    console.log error
+  catch exception
+    console.error exception
     alert("Make sure all required fields have been filled in and the values are in the proper format. For more details view your browser's console log.")
     errors = {}
 
