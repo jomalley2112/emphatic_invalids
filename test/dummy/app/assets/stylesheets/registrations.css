@@ -5,3 +5,17 @@
 	padding: 5px; 
 	margin: 5px;
 }
+
+.highlight-error {
+	border: solid 2px #a94442;
+  /*background-color: inherit;*/
+}
+
+.error-tooltips {
+	font-size: 16px !important;
+	font-style: italic;
+	/*color: white !important;
+	border-color: red !important;
+	background: #a94442 !important;
+	opacity:0.95;*/
+}

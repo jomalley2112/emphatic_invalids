@@ -1,4 +1,5 @@
-= form_with(model: registration, html: {style: "width: 700px;"}, local: false, data: { "highlight-errors" => true }) do |form|
+= form_with(model: registration, html: {style: "width: 700px;"}, local: false, data: { "highlight-errors" => true, "ei-tooltip-position" => '{"my": "left+2 center", "at": "right center"}' }) do |form|
+  = form.hidden_field "log-invalids", id: "log-invalids"
   %div.field
     = form.label :first_name
     = form.text_field :first_name, id: :registration_first_name
@@ -27,14 +28,36 @@
       = form.radio_button :sex, "Female", style: "display: inline;", data: { "ei-tooltip-element" => "fieldset.rb-group", "ei-highlight-element" => "fieldset.rb-group" }
       = form.label :sex, "Female", value: "F", style: "display: inline;"
 
-  %div.field{ style: "width: 150px;" }
+  %div{style: "width: 300px;"}
+    %b Address
+    = form.fields_for :address, @address do |address|
+      %div.field
+        = address.label :street
+        = address.text_field :street
+      %div.field
+        = address.label :city
+        = address.text_field :city
+      %div.field
+        = address.label :state
+        = address.text_field :state
+      %div.field
+        = address.label :zip
+        = address.text_field :zip
+        %div{style: "padding-left: 30px"}
+          %b County
+          = address.fields_for :county, @county do |county|
+            %div.field
+              = county.label :name
+              = county.text_field :name
+
+  %div.field{ style: "width: 150px;", "data-ei-tooltip-position" => '{"my": "left+50 center", "at": "right center"}' }
     = form.label :favorite_color
     = form.color_field :favorite_color, data: { "ei-highlight-element" => ".field", "ei-tooltip-element" => ".field" }
   %div.field
     = form.label :prog_language_ids
     = form.select :prog_language_ids, options_from_collection_for_select(ProgLanguage.all.order(:name), "id", "name", registration.kpl_selections), {}, { multiple: true, size: 3, id: "known_prog_language_ids" }
   %div.field{ style: "width: 150px;" }
-    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field", "ei-highlight-element" => ".field" } }, "true", nil
+    = form.check_box :accept_terms, {id: :accept_terms, data: { "ei-tooltip-element" => ".field", "ei-highlight-element" => ".field" } }, true, false
     = form.label :accept_terms, "I accept the terms", style: "display: inline;"
 
   %div.actions

@@ -6,19 +6,30 @@ parentOrSelf = (input, selector) ->
   if $(input).closest(selector).length then $(input).closest(selector) else input
 
 mostTargetedElement = (input, attr) ->
-  selector = $(input).attr(attr) ? $(input.form).attr(attr)
+  selector = $(input).attr(attr) ? $(input.closest("form")).attr(attr)
   element = parentOrSelf(input, selector)
+
+showPosException = true
+tooltipPosition = (element, attr="data-ei-tooltip-position") ->
+  posStr = $(element).attr(attr) ? $(element.closest("form")).attr(attr) ? '{"my": "left+15 center", "at": "right center"}'
+  try
+    $.parseJSON(posStr)
+  catch exception
+    if showPosException
+      console.error "EmphaticInvalids gem: Check the format of the value of any ei-tooltip-position attributes you may be using. They need to be valid JSON strings."
+      console.error exception
+      showPosException = false
+    posStr = $.parseJSON('{"my": "left+15 center", "at": "right center"}')
 
 class InvalidField
   constructor: (@input, @value) ->
     @input.addClass("invalid-field")
     highlightElement = mostTargetedElement(@input, "data-ei-highlight-element")
     highlightElement.addClass("highlight-error")
-    tooltipElement = mostTargetedElement(@input, "data-ei-tooltip-element")   
+    tooltipElement = mostTargetedElement(@input, "data-ei-tooltip-element")
     $(tooltipElement).tooltip(
       tooltipClass: "error-tooltips"
-      position:
-        my: "left+15 center", at: "right center"
+      position: tooltipPosition(tooltipElement)
     )
     $(tooltipElement).attr("title", @value) #set title so tooltip displays it
 
@@ -26,17 +37,25 @@ resetTabIndex = (form) ->
   # clear all (including valid fields) tab indexes
   $(form).find(":input").removeAttr( "tabindex" )
 
-window.highlightInvalidFields = (form, data) ->
+highlightInvalidFields = (form, data) ->
   resetTabIndex(form)
   errorStr = data.error().responseText
-  errors = $.parseJSON(errorStr)
+  console.log("EmphaticInvalids: "+errorStr) if !!$(form).find("#log-invalids").length > 0
+  try
+    errors = $.parseJSON(errorStr)
+  catch exception
+    console.error exception
+    alert("Make sure all required fields have been filled in and the values are in the proper format. For more details view your browser's console log.")
+    errors = {}
+
   i = 1
+
   for own fieldName, value of errors
     
     # name and/or id attribute equals exactly "fieldName"
     # name attribute ends in "[fieldName]" or "[fieldName][]", or 
     # data-ei-field-alias attribute equals fieldName
-
+    fieldName = fieldName.replace(/\./g, "_attributes][") #if it contains dots it is a nested attribute
     input = $(form).find("[name='"+fieldName+"'], [id='"+fieldName+"'], [name$='["+fieldName+"]'], [name$='["+fieldName+"][]'], [data-ei-field-alias='"+fieldName+"']").not(":hidden")
 
     $(input).attr("tabindex", i++) #set tab order for just invalid fields
@@ -57,8 +76,8 @@ window.highlightInvalidFields = (form, data) ->
   btn = $(form).find("input[type='submit'], button[type='submit'], input[type='image']").first()
   btn.attr("tabindex", i++) #submit button gets next tab order after all invalid fields
 
-$(document).ready( ->
-  $("body").on("ajax:error", "form[data-highlight-errors='true']", (event, data, status, xhr) ->
-    window.highlightInvalidFields(this, data)
+window.EmphaticInvalids = {}
+window.EmphaticInvalids.registerForms = (selector="form[data-remote=true]") ->
+  $("body").on("ajax:error", selector, (event, data, status, xhr) ->
+    highlightInvalidFields(this, data)
   )
-)

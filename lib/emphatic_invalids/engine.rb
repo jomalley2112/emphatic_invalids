@@ -4,7 +4,7 @@ module EmphaticInvalids
     require 'jquery-rails'
     require 'jquery-ui-rails'
     initializer "emphatic_invalids.load_render_helper" do |app|
-	    ActionController::Base.send :include, EmphaticInvalids::RenderHelper
+	    ActionController::Base.send :include, EmphaticInvalids::Renderer
 	  end
   end
 end
