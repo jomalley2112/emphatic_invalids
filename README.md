@@ -67,7 +67,7 @@ If you don't want to register *all* remote forms you can always add you own attr
 <!-- ... -->
 </form>
 ```
-and just specify that selector in the register call:
+and just specify _that_ selector in the register call:
 ```coffeescript
 $(document).ready( ->
   window.EmphaticInvalids.registerForms("form[data-highlight-errors=true"])
@@ -103,7 +103,7 @@ By default the tooltip will be applied to the matching input element itself, but
 <input type="radio" name="choice1" data-ei-tooltip-element="fieldset.rb-group" />
 ```
 
-**\*\*** *The value of the data-ei-highlight-element attribute should be a selector that will be evaluated in the context of the invalid input's closest matching ancestor*
+**\*\*** *The value of these attributes should be a selector that will be evaluated in the context of the invalid input's closest matching ancestor*
 
 By default the tooltip's position will be centered vertically and 15 pixels to the right of it's target element. The position can be overridden at the form or element level by setting a data attribute _data-ei-tooltip-position_ on the target element. Make sure if you have overridden the target element that the attribute is placed on that specific element. The value needs to be a valid JSON string in the format of the `options` argument expected by the [jQuery position method](https://api.jqueryui.com/position/).
 ```HTML
