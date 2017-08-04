@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["jom@nycap.rr.com"]
   s.homepage    = ""
   s.summary     = "Helps to highlight invalid form field values after a form is submitted."
-  s.description = "EmphaticInvalids works with normal server-side ActiveModel validations to highlight, set the focus and tab order to make it easier for end users to find and navigate a form's fields on the client-side."
+  s.description = "Utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-rails'
-  s.add_development_dependency 'mysql2'
   s.add_development_dependency 'pry-rails'
+  s.add_development_dependency 'mysql2'
+  s.add_development_dependency 'haml-rails'
 end

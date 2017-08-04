@@ -140,6 +140,10 @@ Just going live with this. Please send any comments or suggestions.
 
 ## TODO:
 
+ * Add specs once rspec and rails 5.1 play nice together
+ * Decide if there should be an option for flash[:error] to be set in EmphaticInvalids::Renderer
+ * Add the ability to display errors for local (HTML) form submissions in addition to Javascript (AJAX)
+
 
 ## License
 
