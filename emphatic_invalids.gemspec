@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["jom@nycap.rr.com"]
   s.homepage    = ""
   s.summary     = "Helps to highlight invalid form field values after a form is submitted."
-  s.description = "Utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions."
+  s.description = "Super lightweight gem that utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]

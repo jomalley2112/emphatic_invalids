@@ -1,5 +1,5 @@
 # Emphatic Invalids
-Utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions.
+Super lightweight gem that utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions.
 
 ------
 
