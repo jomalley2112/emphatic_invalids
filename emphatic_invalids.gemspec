@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = EmphaticInvalids::VERSION
   s.authors     = ["John OMalley"]
   s.email       = ["jom@nycap.rr.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/jomalley2112/emphatic_invalids"
   s.summary     = "Helps to highlight invalid form field values after a form is submitted."
   s.description = "Lightweight gem that utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions."
   s.license     = "MIT"
