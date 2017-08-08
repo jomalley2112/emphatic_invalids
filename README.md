@@ -1,5 +1,5 @@
 # Emphatic Invalids
-Super lightweight gem that utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions.
+Lightweight gem that utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions.
 
 ------
 
@@ -38,6 +38,8 @@ $ bundle
 ```
 
 In one of your javascript files require `emphatic_invalids/script.coffee`
+
+In one of your stylesheet files require `emphatic_invalids/style.css`
 
 
 
