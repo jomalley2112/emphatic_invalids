@@ -1,6 +1,8 @@
 # Emphatic Invalids
 Lightweight gem that utilizes Rails server-side model validations to display client-side error messages for Ajax form submissions.
 
+[![Gem Version](https://badge.fury.io/rb/emphatic_invalids.svg)](https://badge.fury.io/rb/emphatic_invalids)
+
 ------
 
 *screenshot of invalid form submission*
