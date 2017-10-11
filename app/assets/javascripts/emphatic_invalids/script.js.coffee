@@ -1,5 +1,5 @@
 #= require jquery
-#= require jquery-ui/tooltip
+#= require jquery-ui/widgets/tooltip
 #= require jquery_ujs
 
 parentOrSelf = (input, selector) ->
