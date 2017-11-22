@@ -9,9 +9,10 @@ Lightweight gem that utilizes Rails server-side model validations to display cli
 
 ![Example Screenshot](readme_assets/invalid_submission_screenshot.png "screenshot of invalid form submission.")
 
-To see it in action: `cd test/dummy` and start the server `rails s`. Then just navigate to `http://localhost:3000/registrations/new` and submit the empty form as is.
 ------
 
+
+To see it in action: `cd test/dummy` and start the server `rails s`. Then just navigate to `http://localhost:3000/registrations/new` and submit the empty form as is.
 
 ## Features
 
