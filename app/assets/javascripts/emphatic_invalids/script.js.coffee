@@ -1,5 +1,5 @@
 #= require jquery
-#= require jquery-ui/widgets/tooltip
+#= require jquery-ui/tooltip
 #= require jquery_ujs
 
 parentOrSelf = (input, selector) ->
@@ -53,10 +53,13 @@ highlightInvalidFields = (form, data) ->
   for own fieldName, value of errors
     
     # name and/or id attribute equals exactly "fieldName"
-    # name attribute ends in "[fieldName]" or "[fieldName][]", or 
+    # name attribute ends in "[fieldName]" or "[fieldName][]"
     # data-ei-field-alias attribute equals fieldName
-    fieldName = fieldName.replace(/\./g, "_attributes][") #if it contains dots it is a nested attribute
-    input = $(form).find("[name='"+fieldName+"'], [id='"+fieldName+"'], [name$='["+fieldName+"]'], [name$='["+fieldName+"][]'], [data-ei-field-alias='"+fieldName+"']").not(":hidden")
+    
+    naFieldName = fieldName
+    fieldName = fieldName.replace(/\./g, "_attributes][") #This takes care of attributes
+    naFieldName = naFieldName.replace(/\./g, "_attributes][0][") #This takes care of accepts_nested_attributes_for has_many attributes
+    input = $(form).find("[name='"+fieldName+"'], [id='"+fieldName+"'], [name$='["+fieldName+"]'], [name$='["+naFieldName+"]'], [name$='["+fieldName+"][]'], [data-ei-field-alias='"+fieldName+"']").not(":hidden")
 
     $(input).attr("tabindex", i++) #set tab order for just invalid fields
     

@@ -9,6 +9,7 @@ Lightweight gem that utilizes Rails server-side model validations to display cli
 
 ![Example Screenshot](readme_assets/invalid_submission_screenshot.png "screenshot of invalid form submission.")
 
+To see it in action: `cd test/dummy` and start the server `rails s`. Then just navigate to `http://localhost:3000/registrations/new` and submit the empty form as is.
 ------
 
 
@@ -16,13 +17,13 @@ Lightweight gem that utilizes Rails server-side model validations to display cli
 
  * After an invalid Ajax form submission any fields that failed Rails model validation will be highlighted.
  * Rails validation error message are displayed as a jQuery UI tooltip whenever an invalid field has focus or is hovered over. This way when there are several invalid fields the messages aren't all displayed at once.
- * Adjusts the form fields' tab index***** so the user can easily tab from one invalid field to the next and finally to a submit button.
+ * Adjusts the form fields' tab index\* so the user can easily tab from one invalid field to the next and finally to a submit button.
  * Once an invalid field's value has been changed the highlight is removed from it.
  * Also works with deeply nested attributes
 
 
 
-***** *For the best field navigation experience the model validations should be declared in the same order that the fields appear in the form. This includes nested attributes so that their associations and validations are declared in the same order of the form also. Compare views/registrations/_form.html.haml with the models in the test/dummy application for an example*
+\* *For the best field navigation experience the model validations should be declared in the same order that the fields appear in the form. This includes nested attributes so that their associations and validations are declared in the same order of the form also. Compare views/registrations/_form.html.haml with the models in the test/dummy application for an example*
 
 
 
@@ -54,11 +55,11 @@ $(document).ready( ->
   window.EmphaticInvalids.registerForms()
 )
 
-# or
+# or if using plain js
 
-# $(document).on("turbolinks:load", ->
+# $(document).on("turbolinks:load", function() {
 #   window.EmphaticInvalids.registerForms()
-#  )
+#  )};
 ```
 The `registerForms()` method takes an optional parameter allowing you to select which `<form>` elements in your application should utilize the gem (the default value is `"form[data-remote=true]"`)
 
@@ -81,7 +82,9 @@ $(document).ready( ->
 #### Controllers
 Inside each appropriate controller action, which is usually just *update* and *create* you will need to call the `emphasize_invalids` method like this:
 ```ruby
+# posts_controllers.rb
 def update
+  @post = Post.find(params[:id])
   # ...
   respond_to do |format|
     if @post.save
@@ -95,19 +98,19 @@ end
 ```
 
 ### Optional
-_Note: All the following options are used in the test/dummy application. See the views/registrations/_form.html.haml partial_
+_Note: All the following options are used in the test/dummy application. See the views/registrations/\_form.html.haml partial_
 
-By default the input element ([view the particlulars](#markdown-header-particulars)) itself will be highlighted, but that can be overwritten at the form or field level with data attribute _data-ei-highlight-element_ ******
+By default the input element ([view the particulars](#markdown-header-particulars)) itself will be highlighted, but that can be overwritten at the form or field level with data attribute _data-ei-highlight-element_ \*\*
 ```HTML
 <input type="text" name="author" data-ei-highlight-element=".field" />
 ```
 
-By default the tooltip will be applied to the matching input element itself, but that can be overwritten at the form or field level with a data attribute _data-ei-tooltip-element_ ****** 
+By default the tooltip will be applied to the matching input element itself, but that can be overwritten at the form or field level with a data attribute _data-ei-tooltip-element_ \*\* 
 ```HTML
 <input type="radio" name="choice1" data-ei-tooltip-element="fieldset.rb-group" />
 ```
 
-**\*\*** *The value of these attributes should be a selector that will be evaluated in the context of the invalid input's closest matching ancestor*
+\*\* *The value of these attributes should be a selector that will be evaluated in the context of the invalid input's closest matching ancestor*
 
 By default the tooltip's position will be centered vertically and 15 pixels to the right of it's target element. The position can be overridden at the form or element level by setting a data attribute _data-ei-tooltip-position_ on the target element. Make sure if you have overridden the target element that the attribute is placed on that specific element. The value needs to be a valid JSON string in the format of the `options` argument expected by the [jQuery position method](https://api.jqueryui.com/position/).
 ```HTML
@@ -140,13 +143,13 @@ _If you aren't getting the results you expect it may be helpful to view the actu
 
 ## Contributing
 
-Just going live with this. Please send any comments or suggestions.
+Feel free.
 
 ## TODO:
 
  * Add specs once rspec and rails 5.1 play nice together
  * Decide if there should be an option for flash[:error] to be set in EmphaticInvalids::Renderer
- * Add the ability to display errors for local (HTML) form submissions in addition to Javascript (AJAX)
+ * Add the ability to display errors for local (HTML) form submissions as well
 
 
 ## License
