@@ -1,5 +1,5 @@
 = form_with(model: registration, html: {style: "width: 700px;"}, local: false, data: { "highlight-errors" => true, "ei-tooltip-position" => '{"my": "left+2 center", "at": "right center"}' }) do |form|
-  = form.hidden_field "log-invalids", id: "log-invalids"
+  = hidden_field_tag "log-invalids", id: "log-invalids"
   %div.field
     = form.label :first_name
     = form.text_field :first_name, id: :registration_first_name
