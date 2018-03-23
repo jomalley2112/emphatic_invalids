@@ -1,9 +1,16 @@
 source 'https://rubygems.org'
 
+group :development, :test do
+	gem 'pry-rails', '~> 0.3' #was 0.3.4
+	gem 'mysql2', '~> 0.4' #was 0.4.7
+	gem 'haml-rails', '~> 1.0' #was 1.0.0
+end
+
 # Declare your gem's dependencies in emphatic_invalids.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
+
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
