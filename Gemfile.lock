@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    emphatic_invalids (1.0.1)
+    emphatic_invalids (1.0.2)
       coffee-rails (~> 4.2)
       jquery-rails (~> 4.3)
       jquery-ui-rails (~> 6.0)
