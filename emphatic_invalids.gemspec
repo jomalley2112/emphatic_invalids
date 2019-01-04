@@ -17,7 +17,8 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   # s.test_files = Dir["test/**/*"]
 
-  s.add_dependency 'rails', '~> 5.1' #was 5.1.2
+  s.add_dependency 'sprockets-rails'
+  s.add_dependency "activerecord", '~> 5.0'
   s.add_dependency 'coffee-rails', '~> 4.2' #was 4.2.2
   s.add_dependency 'jquery-rails', '~> 4.3' #was 4.3.1
   s.add_dependency 'loofah', '~> 2.2.3'
