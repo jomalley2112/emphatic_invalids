@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 group :development, :test do
 	gem 'pry-rails', '~> 0.3' #was 0.3.4
 	gem 'mysql2', '< 0.5'
-	gem 'haml-rails', '~> 1.0' #was 1.0.0
+	gem 'haml-rails', '~> 2.0.0' #was 1.0
 end
 
 # Declare your gem's dependencies in emphatic_invalids.gemspec.

@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
   # s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'sprockets-rails'
-  s.add_dependency "activerecord", '~> 5.0'
-  s.add_dependency 'coffee-rails', '~> 4.2' #was 4.2.2
-  s.add_dependency 'jquery-rails', '~> 4.3' #was 4.3.1
+  s.add_dependency "activerecord", '~> 5.2.2.1'
+  s.add_dependency 'coffee-rails', '~> 4.2'
+  s.add_dependency 'jquery-rails', '~> 4.3'
   s.add_dependency 'loofah', '~> 2.2.3'
   s.add_dependency 'jquery-ui-rails', '~> 6.0' #require jquery-ui/widgets/tooltip for 6.0.0+
   s.add_dependency 'sprockets', '~> 3.7.2'
