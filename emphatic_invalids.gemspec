@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   # s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'sprockets-rails'
-  s.add_dependency "activerecord", '~> 5.2.2.1'
+  s.add_dependency "activerecord", '~> 5.2.3'
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'jquery-rails', '~> 4.3'
   s.add_dependency 'loofah', '~> 2.2.3'

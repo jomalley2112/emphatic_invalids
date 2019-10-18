@@ -19,3 +19,6 @@
 	background: #a94442 !important;
 	opacity:0.95;*/
 }
+
+/* JOM 10/16/2019: Needed because as each invalid field gained focus an element was added to a visible list at the bottom of the page */
+.ui-helper-hidden-accessible { display:none; }
