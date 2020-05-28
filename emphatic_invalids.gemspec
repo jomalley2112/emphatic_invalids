@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'sprockets-rails', '~> 3.2'
   s.add_dependency "activerecord", '~> 6.0'
+  s.add_dependency 'activesupport', '>= 6.0.3.1' #mitigate vulnerability: CVE-2020-8165
   s.add_dependency 'coffee-rails', '~> 5.0'
   s.add_dependency 'jquery-rails', '~> 4.3'
   s.add_dependency 'loofah', '~> 2.3'
