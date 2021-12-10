@@ -52,13 +52,13 @@ In one of your stylesheet files require `emphatic_invalids/style.css`
 #### Javascript
 Register your forms by adding the following to one of your project's javascript/coffeescript files:
 ```coffeescript
-$(document).ready( ->
+document.addEventListener("DOMContentLoaded", ->
   window.EmphaticInvalids.registerForms()
 )
 
 # or if using plain js
 
-# $(document).on("turbolinks:load", function() {
+# document.addEventListener("DOMContentLoaded", function() {
 #   window.EmphaticInvalids.registerForms()
 #  )};
 ```

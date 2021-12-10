@@ -1,6 +1,6 @@
 #= require_tree .
 #= require emphatic_invalids/script.coffee
 
-$(document).ready( ->
+document.addEventListener("DOMContentLoaded", ->
   window.EmphaticInvalids.registerForms()
 )
