@@ -1,6 +1,8 @@
+
 /*
- *= require jquery-ui/tooltip
+ *= require emphatic_invalids/jquery-ui.css
 */
+
 
 .highlight-error {
 	border: solid 2px #a94442;

@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails', '~> 5.0'
   s.add_dependency 'jquery-rails', '~> 4.3'
   s.add_dependency 'loofah', '~> 2.3'
-  s.add_dependency 'jquery-ui-rails', '~> 6.0' #require jquery-ui/widgets/tooltip for 6.0.0+
   s.add_dependency 'sprockets', '~> 3.7.2'
   s.add_dependency 'rack', '>= 2.1.4'
   s.add_dependency "nokogiri", '~> 1.10'
